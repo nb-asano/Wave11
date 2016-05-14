@@ -30,11 +30,12 @@
 #ifndef _WAVEGENERATOR_H_
 #define _WAVEGENERATOR_H_
 
-#if defined(_WIN32) && defined(_MSC_VER)
-#define _USE_MATH_DEFINES
-#endif // defined(_WIN32) && defined(_MSC_VER)
-#include <math.h>
+#include <cmath>
 #include <cstdlib>
+
+#ifndef M_PI
+#define M_PI	3.14159265358979323846
+#endif
 
 // ----------------------------------------------------------------------------
 /**

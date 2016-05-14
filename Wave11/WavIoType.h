@@ -34,7 +34,7 @@
 #include <sstream>
 #include <exception>
 
-#ifdef WIN32
+#if defined(_WIN32) && defined(_MSC_VER)
 #include <Windows.h>
 #include <tchar.h>
 
@@ -44,6 +44,19 @@ typedef std::basic_istringstream<TCHAR> itstringstream;
 typedef std::basic_ostringstream<TCHAR> otstringstream;
 
 #else
+
+typedef char TCHAR;
+typedef unsigned char BYTE;
+typedef unsigned short WORD;
+typedef unsigned int DWORD;
+typedef std::basic_string<char> tstring;
+typedef std::basic_ifstream<char> tifstream;
+typedef std::basic_istringstream<char> itstringstream;
+typedef std::basic_ostringstream<char> otstringstream;
+
+#define _T
+#define _tfopen fopen
+
 #endif
 
 // ----------------------------------------------------------------------------
@@ -51,14 +64,14 @@ typedef std::basic_ostringstream<TCHAR> otstringstream;
  * @brief ストリーム読み込みの例外クラス
  */
 // ----------------------------------------------------------------------------
-class WavIoException : public std::exception
+class WavIoException : public std::runtime_error
 {
 public:
 	/**
 	 * @param[in]	what_arg	例外メッセージ
 	 */
-	explicit WavIoException(const std::string& what_arg) : exception(what_arg.c_str()) {}
-	WavIoException() : exception("WavIoException") {}
+	explicit WavIoException(const std::string& what_arg) : runtime_error(what_arg.c_str()) {}
+	WavIoException() : runtime_error("WavIoException") {}
 	virtual ~WavIoException(void) {}
 };
 

@@ -30,6 +30,7 @@
 #ifndef _RIFFWAVREADER_H_
 #define _RIFFWAVREADER_H_
 
+#include <cstring>
 #include "BinaryReader.h"
 
 #if !(defined(_MSC_VER) && defined(_WAVEFORMATEX_))
@@ -43,7 +44,7 @@ typedef struct {
 	WORD wFormatTag;
 	WORD nChannels;
 	DWORD nSamplesPerSec;
-	DWORD nAvgBytesPerSex;
+	DWORD nAvgBytesPerSec;
 	WORD nBlockAlign;
 	WORD wBitsPerSample;
 	WORD cbSize;
